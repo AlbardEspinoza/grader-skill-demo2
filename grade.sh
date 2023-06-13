@@ -7,11 +7,12 @@ mkdir grading-area
 
 git clone $1 student-submission
 echo 'Finished cloning'
+IS_LIST_EXAMPLES_PRESENT=`find student-submission -type f -name ListExamples.java`
 
-if find student-submission -type f -name ListExmaples.java | grep -q .; 
+if [[ -n "$IS_LIST_EXAMPLES_PRESENT" ]]; 
 then
   echo 'ListExamples.java found'
-  find stundent-submission -type f -name ListExamples.java -exec cp {} grading-area \;
+  cp $IS_LIST_EXAMPLES_PRESENT grading-area
 else
   echo 'ListExamples.java not found anywhere in submitted repo.'
   echo 'Score: 0/4'
